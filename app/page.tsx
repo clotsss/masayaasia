@@ -7,13 +7,13 @@ const services = [
   { 
     name: 'Discovery Hotels', 
     desc: 'Experience world-class luxury and comfort in the heart of the islands.', 
-    src: '/Hotels.webp', 
+    src: '/hotels.webp', 
     link: 'https://www.masayatrip.com/hotels' 
   },
   { 
     name: 'Dining', 
     desc: 'Savor the flavors of the Philippines with our curated culinary tours and beachside dinners.', 
-    src: '/Dining.webp', 
+    src: '/dining.webp', 
     link: 'https://www.masayatrip.com/dining' 
   },
   { 
@@ -51,8 +51,8 @@ export default function Home() {
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
               <Image 
-                src="/MasayaAsiaLtd-.webp" 
-                alt="MasayaTrip Logo" 
+                src="/masayaasialtd-.webp" 
+                alt="masayatrip Logo" 
                 fill 
                 className="object-contain" 
                 priority 
@@ -82,7 +82,7 @@ export default function Home() {
                 <Link href="https://www.masayatrip.com/privacy-policy" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Policy</Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                   <div className="relative h-40 w-full">
-                    <Image src="/Policy.webp" alt="Policy" fill className="object-cover" unoptimized />
+                    <Image src="/policy.webp" alt="Policy" fill className="object-cover" unoptimized />
                   </div>
                 </div>
               </div>
@@ -104,7 +104,7 @@ export default function Home() {
                 <Link href="https://www.masayatrip.com/community" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Community</Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                   <div className="relative h-40 w-full">
-                    <Image src="/Community.webp" alt="Community" fill className="object-cover" unoptimized />
+                    <Image src="/community.webp" alt="Community" fill className="object-cover" unoptimized />
                   </div>
                 </div>
               </div>
@@ -114,7 +114,7 @@ export default function Home() {
                 <Link href="https://www.masayatrip.com/membership" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Membership</Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                   <div className="relative h-40 w-full">
-                    <Image src="/Membership.webp" alt="Membership" fill className="object-cover" unoptimized />
+                    <Image src="/membership.webp" alt="Membership" fill className="object-cover" unoptimized />
                   </div>
                 </div>
               </div>
