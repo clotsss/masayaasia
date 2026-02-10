@@ -4,10 +4,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const services = [
-  { name: 'Discovery Hotels', desc: 'Experience world-class luxury and comfort in the heart of the islands.', img: '/Hotels.webp', link: 'https://www.masayatrip.com/hotels' },
-  { name: 'Dining', desc: 'Savor the flavors of the Philippines with our curated culinary tours and beachside dinners.', img: '/Dining.webp', link: 'https://www.masayatrip.com/dining' },
-  { name: 'Transportation', desc: 'Seamless travel between islands with our premium transport services and private transfers.', img: '/transportation.webp', link: 'https://www.masayatrip.com/transportations/' },
-  { name: 'Tours', desc: 'Explore hidden gems and iconic landmarks with our professionally guided island excursions.', img: '/tour.webp', link: 'https://www.masayatrip.com/tours' }
+  { name: 'Discovery Hotels', desc: 'Experience world-class luxury and comfort in the heart of the islands.', src='/Hotels.webp', link: 'https://www.masayatrip.com/hotels' },
+  { name: 'Dining', desc: 'Savor the flavors of the Philippines with our curated culinary tours and beachside dinners.', src="/Dining.webp', link: 'https://www.masayatrip.com/dining' },
+  { name: 'Transportation', desc: 'Seamless travel between islands with our premium transport services and private transfers.', src='/transportation.webp', link: 'https://www.masayatrip.com/transportations/' },
+  { name: 'Tours', desc: 'Explore hidden gems and iconic landmarks with our professionally guided island excursions.', src='/tour.webp', link: 'https://www.masayatrip.com/tours' }
 ];
 
 export default function Home() {
