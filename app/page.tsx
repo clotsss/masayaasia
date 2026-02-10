@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -32,15 +32,24 @@ const services = [
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const videoRef = useRef(null);
   
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
+    
+    // Force video play for live environments/Render
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Autoplay blocked or video not found:", error);
+      });
+    }
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const textColor = scrolled ? 'text-slate-900' : 'text-white';
-  const navBg = scrolled ? 'bg-white/95 shadow-md py-2' : 'backdrop-blur-md bg-black/10 py-4';
+  const navBg = scrolled ? 'bg-white shadow-md py-2' : 'backdrop-blur-md bg-black/10 py-4';
   
   return (
     <div className="min-h-screen bg-white font-sans antialiased">
@@ -130,20 +139,21 @@ export default function Home() {
       {/* HERO SECTION */}
       <header className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-slate-900">
         <video 
+          ref={videoRef}
           autoPlay 
           loop 
           muted 
           playsInline 
           preload="auto"
           poster="/HeroVideo.webp" 
-          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none transition-opacity duration-1000"
+          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         >
-          <source src="/HeroVideo.webm" type="video/webm" />
           <source src="/HeroVideo.mp4" type="video/mp4" />
+          <source src="/HeroVideo.webm" type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-black/30 z-[1]" />
         <div className="relative z-10 px-4 text-center text-white">
-          <h1 className="text-5xl md:text-8xl font-black mb-6 drop-shadow-2xl tracking-tighter uppercase transition-transform duration-700 hover:scale-105">MASAYA ASIA</h1>
+          <h1 className="text-5xl md:text-8xl font-black mb-6 drop-shadow-2xl tracking-tighter uppercase">MASAYA ASIA</h1>
           <p className="text-lg md:text-xl mb-10 font-light tracking-[0.3em] max-w-2xl mx-auto uppercase opacity-90">Find your perfect stay with us today.</p>
         </div>
       </header>
@@ -181,14 +191,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER - Matched to About Us style */}
+      {/* FOOTER */}
       <footer className="bg-slate-950 py-10 px-6 border-t border-white/5">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center">
           <div className="mb-6 opacity-50 hover:opacity-100 transition-opacity">
              <Image src="/masayaasialtd-.webp" alt="Logo" width={100} height={30} className="object-contain brightness-0 invert" unoptimized />
           </div>
           <p className="text-white/40 text-[9px] tracking-[0.5em] uppercase font-bold text-center">
-            © 2026 Masaya Asia Limited <span className="mx-2 text-white/10">|</span> Professional Travel Identity
+            © 2026 Masaya Asia Limited <span className="mx-2 text-white/10">|</span> All Rights Reserved
           </p>
         </div>
       </footer>
