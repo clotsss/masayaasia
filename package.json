@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "start chrome http://localhost:3000 && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint"
   },
   "dependencies": {
     "browser-image-compression": "^2.0.2",
