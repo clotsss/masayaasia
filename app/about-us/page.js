@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function AboutUs() {
-  // Automatic image transition logic
+  // Logic for the automatic image transition
   const transitionImages = ['/one.webp', '/two.webp', '/three.webp', '/four.webp'];
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -18,24 +18,24 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-pink-100 selection:text-pink-600">
       
-      {/* NAVIGATION BAR - LOGO FIX */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] bg-slate-900 backdrop-blur-md px-6 py-3 border-b border-white/5">
+      {/* NAVIGATION BAR - FIXED LOGO VISIBILITY */}
+      <nav className="fixed top-0 left-0 right-0 z-[100] bg-slate-900/60 backdrop-blur-md px-6 py-2 border-b border-white/5">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link href="/">
-            <div className="relative w-32 h-8 cursor-pointer hover:opacity-80 transition-all flex items-center">
+            <div className="relative w-32 h-10 cursor-pointer hover:opacity-80 transition-all">
               <Image 
-                src="/masayaasialtd-.webp" 
+                src="/MasayaAsiaLtd-.webp" 
                 alt="Masaya Logo" 
                 fill 
                 className="object-contain brightness-0 invert" 
                 priority 
-                unoptimized 
+                unoptimized
               />
             </div>
           </Link>
 
           <Link href="/" className="group flex items-center">
-            <span className="text-white text-[11px] font-bold uppercase tracking-[0.3em] hover:text-pink-500 transition-all duration-300 cursor-pointer">
+            <span className="text-white text-[11px] uppercase tracking-[0.3em] hover:text-pink-500 transition-all duration-300 cursor-pointer">
               Close
             </span>
           </Link>
@@ -53,6 +53,7 @@ export default function AboutUs() {
             priority
             unoptimized
           />
+          {/* Fixed Gradient Overlay Spelling */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/20 to-slate-950"></div>
         </div>
         <div className="relative z-10 text-center px-4">
@@ -70,7 +71,7 @@ export default function AboutUs() {
           <div className="space-y-5">
             <h3 className="text-2xl text-slate-900 tracking-tighter uppercase border-l-4 border-pink-500 pl-4">About us</h3>
             <p className="text-slate-600 leading-relaxed text-[13px] text-justify">
-              Masaya Asia Limited is a premier travel and tour company dedicated to creating unforgettable travel experiences across Asia. With our headquarters strategically located in Hong Kong, we have established a strong and reliable presence throughout the continent, with operational offices in key destinations including Bali, Manila, Shanghai, Beijing, Chengdu, and Taiwan.
+            Masaya Asia Limited is a premier travel and tour company dedicated to creating unforgettable travel experiences across Asia. With our headquarters strategically located in Hong Kong, we have established a strong and reliable presence throughout the continent, with operational offices in key destinations including Bali, Manila, Shanghai, Beijing, Chengdu, and Taiwan.
             </p>
             <p className="text-black font-bold italic leading-relaxed text-[12px]">
               Our name, <span className="text-pink-500 font-bold underline decoration-2 underline-offset-4">Masaya</span>, which means happy in Filipino, is the core of our philosophy. We believe in delivering joy and satisfaction through seamless travel solutions, expert local knowledge, and a commitment to excellence.
@@ -138,18 +139,18 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* SECTION 4: METHODOLOGY */}
+      {/* SECTION 4: METHODOLOGY & ASIA NETWORK */}
       <section className="bg-slate-50 py-14 px-6 rounded-[3rem] mx-4 my-6 border border-slate-200">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div>
             <h3 className="text-xl font-black mb-8 tracking-tighter uppercase text-slate-900">Our Approach</h3>
             <ul className="space-y-4">
               {[
-                { label: "Technology Driven Convenience", val: "State-of-the-art booking website that is user-friendly and secure." },
+                { label: "Technology Driven", val: "State-of-the-art booking website that is user-friendly and secure." },
                 { label: "Local Expertise", val: "On-the-ground teams possessing intimate knowledge of their respective regions." },
-                { label: "Client-Centric", val: "Personalized service and 24/7 support to handle any inquiries." },
+                { label: "Client-Centric", val: "Personalized service and 24/7 support for all travelers." },
                 { label: "Trust & Reliability", val: "Committed to transparency and dependability in all our dealings." },
-                { label: "Rewarding Loyalty", val: "Earn, redeem, and share points with our robust membership program." }
+                { label: "Loyalty Program", val: "Earn and redeem points for exclusive advantages across our network." }
               ].map((point, idx) => (
                 <li key={idx} className="flex flex-col border-l-2 border-pink-200 pl-4 hover:border-pink-500 transition-colors">
                   <span className="text-slate-950 font-black uppercase text-[9px] tracking-widest mb-1">{point.label}</span>
@@ -164,7 +165,7 @@ export default function AboutUs() {
               <h3 className="text-sm font-black mb-4 uppercase tracking-tighter text-pink-500">Asia Network</h3>
               <div className="grid grid-cols-2 gap-4 text-[9px] font-bold uppercase tracking-wider text-slate-400">
                 <div><p className="text-white mb-1">Headquarters</p>Hong Kong</div>
-                <div><p className="text-white mb-1">China Office</p>Shanghai, Beijing, Chengdu</div>
+                <div><p className="text-white mb-1">Mainland China</p>Shanghai, Beijing, Chengdu</div>
                 <div><p className="text-white mb-1">Southeast Asia</p>Philippines, Indonesia, Bali</div>
                 <div><p className="text-white mb-1">East Asia</p>Taiwan</div>
               </div>
