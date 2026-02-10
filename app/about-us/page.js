@@ -29,6 +29,7 @@ export default function AboutUs() {
                 fill 
                 className="object-contain" 
                 priority 
+                unoptimized 
               />
             </div>
           </Link>
@@ -50,8 +51,8 @@ export default function AboutUs() {
             fill
             className="object-cover object-bottom opacity-60 scale-105"
             priority
+            unoptimized
           />
-          {/* Fixed "bg-gradient" typo here */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/20 to-slate-950"></div>
         </div>
         <div className="relative z-10 text-center px-4">
@@ -89,10 +90,10 @@ export default function AboutUs() {
                   alt={`Masaya Culture ${index + 1}`} 
                   fill 
                   className="object-cover object-bottom" 
+                  unoptimized
                 />
               </div>
             ))}
-            {/* Fixed "bg-gradient" typo here */}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent"></div>
           </div>
         </div>
