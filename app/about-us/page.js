@@ -18,11 +18,11 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-pink-100 selection:text-pink-600">
       
-      {/* NAVIGATION BAR - FIXED LOGO VISIBILITY */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] bg-slate-900/80 backdrop-blur-md px-6 py-2 border-b border-white/5">
+      {/* NAVIGATION BAR - LOGO FIX */}
+      <nav className="fixed top-0 left-0 right-0 z-[100] bg-slate-900 backdrop-blur-md px-6 py-3 border-b border-white/5">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link href="/">
-            <div className="relative w-32 h-10 cursor-pointer hover:opacity-80 transition-all">
+            <div className="relative w-32 h-8 cursor-pointer hover:opacity-80 transition-all flex items-center">
               <Image 
                 src="/masayaasialtd-.webp" 
                 alt="Masaya Logo" 
@@ -53,7 +53,6 @@ export default function AboutUs() {
             priority
             unoptimized
           />
-          {/* Fixed Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/20 to-slate-950"></div>
         </div>
         <div className="relative z-10 text-center px-4">
@@ -139,7 +138,7 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* SECTION 4: METHODOLOGY & ASIA NETWORK */}
+      {/* SECTION 4: METHODOLOGY */}
       <section className="bg-slate-50 py-14 px-6 rounded-[3rem] mx-4 my-6 border border-slate-200">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div>
