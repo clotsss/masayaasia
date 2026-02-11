@@ -66,7 +66,7 @@ return (
                 alt="masayatrip Logo" 
                 fill 
                 // This ensures the logo is white on the video and original color on the white nav
-                className={`object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`} 
+              
                 priority 
                 unoptimized 
               />
