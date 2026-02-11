@@ -24,7 +24,7 @@ export default function AboutUs() {
           <Link href="/">
             <div className="relative w-32 h-10 cursor-pointer hover:opacity-80 transition-all">
               <Image 
-                src="/masayaasialtd-.webp" 
+                src="/masayaAsiaLtd-.webp" 
                 alt="Masaya Logo" 
                 fill 
                 className="object-contain" 
