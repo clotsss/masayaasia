@@ -33,8 +33,11 @@ const services = [
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   
-  // FIX: Properly type the video ref to resolve the 'never' type error during build
-  const videoRef = useRef<HTMLVideoElement>(null);
+  // FIX: Place this here to fix the "type never" build error
+  const videoRef = useRef<HTMLVideoElement>(null); 
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
   
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
