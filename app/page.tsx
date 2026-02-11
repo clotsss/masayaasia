@@ -7,13 +7,13 @@ const services = [
   { 
     name: 'Discovery Hotels', 
     desc: 'Experience world-class luxury and comfort in the heart of the islands.', 
-    src: '/Hotels.webp', 
+    src: '/hotels.webp', 
     link: 'https://www.masayatrip.com/hotels' 
   },
   { 
     name: 'Dining', 
     desc: 'Savor the flavors of the Philippines with our curated culinary tours and beachside dinners.', 
-    src: '/Dining.webp', 
+    src: '/dining.webp', 
     link: 'https://www.masayatrip.com/dining' 
   },
   { 
@@ -50,7 +50,14 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
-              <Image src="/MasayaAsiaLtd-.webp" alt="MasayaTrip Logo" fill className="object-contain" priority />
+              <Image 
+                src="/masayaasialtd-.webp" 
+                alt="masayatrip Logo" 
+                fill 
+                className="object-contain" 
+                priority 
+                unoptimized 
+              />
             </div>
           </Link>
 
@@ -65,7 +72,7 @@ export default function Home() {
                 </Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                   <div className="relative h-40 w-full">
-                    <Image src="/aboutus.webp" alt="About Us" fill className="object-cover" />
+                    <Image src="/aboutus.webp" alt="About Us" fill className="object-cover" unoptimized />
                   </div>
                 </div>
               </div>
@@ -75,7 +82,7 @@ export default function Home() {
                 <Link href="https://www.masayatrip.com/privacy-policy" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Policy</Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                   <div className="relative h-40 w-full">
-                    <Image src="/Policy.webp" alt="Policy" fill className="object-cover" />
+                    <Image src="/policy.webp" alt="Policy" fill className="object-cover" unoptimized />
                   </div>
                 </div>
               </div>
@@ -86,7 +93,7 @@ export default function Home() {
               <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] hover:text-[#ff00e1] transition-all tracking-[0.2em]`}>Explore</Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                 <div className="relative h-44 w-full">
-                  <Image src="/Explore.webp" alt="Explore" fill className="object-cover" />
+                  <Image src="/Explore.webp" alt="Explore" fill className="object-cover" unoptimized />
                 </div>
               </div>
             </div>
@@ -97,7 +104,7 @@ export default function Home() {
                 <Link href="https://www.masayatrip.com/community" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Community</Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                   <div className="relative h-40 w-full">
-                    <Image src="/Community.webp" alt="Community" fill className="object-cover" />
+                    <Image src="/community.webp" alt="Community" fill className="object-cover" unoptimized />
                   </div>
                 </div>
               </div>
@@ -107,7 +114,7 @@ export default function Home() {
                 <Link href="https://www.masayatrip.com/membership" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Membership</Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                   <div className="relative h-40 w-full">
-                    <Image src="/Membership.webp" alt="Membership" fill className="object-cover" />
+                    <Image src="/membership.webp" alt="Membership" fill className="object-cover" unoptimized />
                   </div>
                 </div>
               </div>
@@ -151,7 +158,13 @@ export default function Home() {
             {services.map((service) => (
               <div key={service.name} className="group flex flex-col bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500">
                 <Link href={service.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-video overflow-hidden">
-                  <Image src={service.src} alt={service.name} fill className="object-cover group-hover:scale-110 transition-transform duration-[1.2s] ease-out" />
+                  <Image 
+                    src={service.src} 
+                    alt={service.name} 
+                    fill 
+                    className="object-cover group-hover:scale-110 transition-transform duration-[1.2s] ease-out" 
+                    unoptimized
+                  />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="px-6 py-2 bg-white text-black font-black text-[10px] uppercase tracking-[0.3em] transform translate-y-4 group-hover:translate-y-0 transition-all shadow-xl">View Details</div>
                   </div>
