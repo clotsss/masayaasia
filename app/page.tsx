@@ -54,21 +54,12 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       
-      {/* NAVIGATION */}
+   {/* NAVIGATION */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-13 flex items-center ${navBg}`}>
-        <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
+        <div className="max-w-1400px mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
-              <Image 
-                // FIXED: Matched to the filename with hyphen as per your repository structure
-                src="/masayaAsiaLtd-.webp" 
-                alt="masayatrip Logo" 
-                fill 
-                // This ensures the logo is white on the video and original color on the white nav
-                className={`object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`} 
-                priority 
-                unoptimized 
-              />
+              <Image src="/MasayaAsiaLtd-.webp" alt="MasayaTrip Logo" fill className="object-contain" priority />
             </div>
           </Link>
 
