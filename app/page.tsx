@@ -51,15 +51,23 @@ export default function Home() {
   const textColor = scrolled ? 'text-black' : 'text-white';
   const navBg = scrolled ? 'bg-white/90 shadow-md' : 'backdrop-blur-xl bg-transparent';
   
+const textColor = scrolled ? 'text-black' : 'text-white';
+  const navBg = scrolled ? 'bg-white/90 shadow-md' : 'backdrop-blur-xl bg-transparent';
+  
   return (
     <div className="min-h-screen bg-white">
-      
-   {/* NAVIGATION */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-13 flex items-center ${navBg}`}>
-        <div className="max-w-1400px mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 flex items-center ${navBg}`}>
+        <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
-              <Image src="/MasayaAsiaLtd-.webp" alt="MasayaTrip Logo" fill className="object-contain" priority />
+              <Image 
+                src="/masayaasialtd-.webp" // Check if this hyphen is in your filename
+                alt="masayatrip Logo" 
+                fill 
+                className={`object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`} 
+                priority 
+                unoptimized 
+              />
             </div>
           </Link>
 
