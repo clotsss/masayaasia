@@ -36,23 +36,27 @@ export default function Home() {
   // FIXED: Explicit type added to prevent "never" build error
   const videoRef = useRef<HTMLVideoElement>(null); 
 
-useEffect(() => {
+  useEffect(() => {
+    // FIXED: Added scroll listener logic to actually toggle 'scrolled' state
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+
     const video = videoRef.current;
     if (video) {
       video.muted = true;
       video.defaultMuted = true;
       
-      // Force play on every interaction or load
       const attemptPlay = () => {
         video.play().catch(() => {
-          // If it fails (like in Low Power Mode), we try again on the first scroll
           window.addEventListener('touchstart', () => video.play(), { once: true });
         });
       };
 
       attemptPlay();
     }
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const textColor = scrolled ? 'text-black' : 'text-white';
   const navBg = scrolled ? 'bg-white/90 shadow-md' : 'backdrop-blur-xl bg-transparent';
   
@@ -61,16 +65,14 @@ return (
     <div className="min-h-screen bg-white">
       
       {/* NAVIGATION */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-13 flex items-center ${navBg}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 flex items-center ${navBg}`}>
         <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
               <Image 
-                // Matches your file: masayaAsiaLtd-.webp
                 src="/masayaAsiaLtd-.webp" 
                 alt="masayatrip Logo" 
                 fill 
-                // FIXED: Removed 'brightness-0 invert' so it stays original colors
                 className="object-contain transition-all duration-300" 
                 priority 
                 unoptimized 
@@ -78,26 +80,25 @@ return (
             </div>
           </Link>
 
-          {/* CENTER NAVIGATION ITEMS */}
-          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-10 z-10">
-            <div className="flex items-center gap-6">
+          {/* FIXED: Removed 'hidden lg:flex' and added overflow for Mobile Compatibility */}
+          <div className="flex absolute left-1/2 -translate-x-1/2 items-center gap-4 md:gap-10 z-10 overflow-x-auto no-scrollbar max-w-fit px-2">
+            <div className="flex items-center gap-4 md:gap-6">
               
               {/* ABOUT US */}
               <div className="relative group py-5">
-                <Link href="/about-us" className={`${textColor} text-[12px] tracking-wide hover:text-[#ff00e1] transition-colors whitespace-nowrap font-light`}>
+                <Link href="/about-us" className={`${textColor} text-[10px] md:text-[12px] tracking-wide hover:text-[#ff00e1] transition-colors whitespace-nowrap font-bold md:font-light`}>
                   About us
                 </Link>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
+                <div className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                   <div className="relative h-40 w-full">
                     <Image src="/aboutus.webp" alt="About Us" fill className="object-cover" unoptimized />
                   </div>
                 </div>
               </div>
 
-              
               <div className="relative group py-5">
-                <Link href="https://www.masayatrip.com/privacy-policy" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Policy</Link>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
+                <Link href="https://www.masayatrip.com/privacy-policy" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[10px] md:text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors font-bold md:font-normal`}>Policy</Link>
+                <div className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                   <div className="relative h-40 w-full">
                     <Image src="/policy.webp" alt="Policy" fill className="object-cover" unoptimized />
                   </div>
@@ -105,19 +106,19 @@ return (
               </div>
             </div>
 
-        <div className="relative group py-5">
-              <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] hover:text-[#ff00e1] transition-all tracking-[0.2em]`}>Explore</Link>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
+            <div className="relative group py-5">
+              <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[10px] md:text-[11px] hover:text-[#ff00e1] transition-all tracking-[0.2em] font-bold md:font-normal`}>Explore</Link>
+              <div className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 w-72 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                 <div className="relative h-44 w-full">
                   <Image src="/explore.webp" alt="Explore" fill className="object-cover" unoptimized />
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4 md:gap-6">
               <div className="relative group py-5">
-                <Link href="https://www.masayatrip.com/community" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Community</Link>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
+                <Link href="https://www.masayatrip.com/community" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[10px] md:text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors font-bold md:font-normal`}>Community</Link>
+                <div className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                   <div className="relative h-40 w-full">
                     <Image src="/community.webp" alt="Community" fill className="object-cover" unoptimized />
                   </div>
@@ -125,8 +126,8 @@ return (
               </div>
 
               <div className="relative group py-5">
-                <Link href="https://www.masayatrip.com/membership" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Membership</Link>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
+                <Link href="https://www.masayatrip.com/membership" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[10px] md:text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors font-bold md:font-normal`}>Membership</Link>
+                <div className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                   <div className="relative h-40 w-full">
                     <Image src="/membership.webp" alt="Membership" fill className="object-cover" unoptimized />
                   </div>
@@ -135,7 +136,7 @@ return (
             </div>
           </div>
 
-          <Link href="https://www.masayatrip.com/contact-us" target="_blank" rel="noopener noreferrer" className="z-10 text-[11px] tracking-[0.2em] text-white bg-pink-700 px-6 py-2.5 rounded-full hover:bg-[#00C2FF] transition-all">
+          <Link href="https://www.masayatrip.com/contact-us" target="_blank" rel="noopener noreferrer" className="z-10 text-[9px] md:text-[11px] tracking-[0.2em] text-white bg-pink-700 px-3 py-2 md:px-6 md:py-2.5 rounded-full hover:bg-[#00C2FF] transition-all whitespace-nowrap">
             Contact Us
           </Link>
         </div>
@@ -149,24 +150,18 @@ return (
           loop 
           muted 
           playsInline 
-          // 1. ADD: webkit-playsinline for older iOS compatibility
+          // @ts-ignore
           webkit-playsinline="true"
-          // 2. IMPORTANT: The poster is what shows if the video fails
           poster="/herovideo.webp" 
           className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
-          // 3. ADD: This helps mobile browsers understand the video is meant to be background
           disablePictureInPicture
           disableRemotePlayback
         >
-          {/* 4. FIX: Use .mp4 FIRST. WebM often fails on Safari mobile */}
           <source src="/herovideo.mp4" type="video/mp4" />
           <source src="/herovideo.webm" type="video/webm" />
-          
-          {/* 5. BACKUP: If video fails, the poster image should be visible */}
           Your browser does not support the video tag.
         </video>
         
-        {/* Overlay to ensure text is readable even if video doesn't load */}
         <div className="absolute inset-0 bg-black/30 z-[1]"></div>
         
         <div className="relative z-10 px-4 text-center text-white">
@@ -221,4 +216,3 @@ return (
     </div>
   );
 }
-
