@@ -137,7 +137,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO SECTION */}
+    {/* HERO SECTION */}
       <header className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-slate-900">
         <video 
           ref={videoRef}
@@ -145,13 +145,15 @@ export default function Home() {
           loop 
           muted 
           playsInline 
-          poster="/HeroVideo.webp" 
+          // FIX: Match lowercase filename from repository
+          poster="/herovideo.webp" 
           className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         >
-          <source src="/HeroVideo.webm" type="video/webm" />
-          <source src="/HeroVideo.mp4" type="video/mp4" />
+          {/* FIX: Use lowercase filenames to match your repository */}
+          <source src="/herovideo.webm" type="video/webm" />
+          <source src="/herovideo.mp4" type="video/mp4" />
         </video>
-        {/* FIX: Added a subtle dark overlay to ensure text visibility regardless of video brightness */}
+        
         <div className="absolute inset-0 bg-black/20 z-[1]"></div>
         
         <div className="relative z-10 px-4 text-center text-white">
@@ -159,7 +161,6 @@ export default function Home() {
           <p className="text-xl md:text-2xl mb-10 opacity-100 font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">Find your perfect stay with us today.</p>
         </div>
       </header>
-
       {/* SERVICES SECTION */}
       <section className="bg-[#f8fafc] min-h-screen flex flex-col justify-between pt-20 pb-6 px-6 snap-start">
         <div className="max-w-7xl mx-auto w-full grow flex flex-col justify-center">
