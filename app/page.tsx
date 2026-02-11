@@ -33,17 +33,14 @@ const services = [
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   
-  // FIX: Place this here to fix the "type never" build error
+  // FIXED: Explicit type added to prevent "never" build error
   const videoRef = useRef<HTMLVideoElement>(null); 
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-  
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
 
-    // FIX: Force video playback on load to ensure it plays on all browsers
+    // FIXED: Play trigger to ensure video starts on live server
     if (videoRef.current) {
       videoRef.current.play().catch(err => console.log("Video playback error:", err));
     }
@@ -58,28 +55,26 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       
       {/* NAVIGATION */}
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 flex items-center ${navBg}`}>
-  <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
-    <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
-      <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
-        <Image 
-          // FIX: Ensure this matches your filename EXACTLY (casing and hyphens)
-          src="/masayaasialtd.webp" 
-          alt="masayatrip Logo" 
-          fill 
-          // This ensures the logo is white on the video and original color on the white nav
-          className={`object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`} 
-          priority 
-          unoptimized 
-        />
-      </div>
-    </Link>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 flex items-center ${navBg}`}>
+        <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
+          <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
+            <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
+              <Image 
+                // FIXED: Matched to the filename with hyphen as per your repository structure
+                src="/masayaasialtd-.webp" 
+                alt="masayatrip Logo" 
+                fill 
+                // This ensures the logo is white on the video and original color on the white nav
+                className={`object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`} 
+                priority 
+                unoptimized 
+              />
+            </div>
+          </Link>
 
           {/* CENTER NAVIGATION ITEMS */}
           <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-10 z-10">
             <div className="flex items-center gap-6">
-              
-              {/* ABOUT US */}
               <div className="relative group py-5">
                 <Link href="/about-us" className={`${textColor} text-[12px] tracking-wide hover:text-[#ff00e1] transition-colors whitespace-nowrap font-light`}>
                   About us
@@ -91,7 +86,6 @@ export default function Home() {
                 </div>
               </div>
               
-              {/* POLICY */}
               <div className="relative group py-5">
                 <Link href="https://www.masayatrip.com/privacy-policy" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Policy</Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
@@ -102,7 +96,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* EXPLORE */}
             <div className="relative group py-5">
               <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] hover:text-[#ff00e1] transition-all tracking-[0.2em]`}>Explore</Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
@@ -113,7 +106,6 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-6">
-              {/* COMMUNITY */}
               <div className="relative group py-5">
                 <Link href="https://www.masayatrip.com/community" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Community</Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
@@ -123,7 +115,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* MEMBERSHIP */}
               <div className="relative group py-5">
                 <Link href="https://www.masayatrip.com/membership" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Membership</Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
@@ -141,7 +132,7 @@ export default function Home() {
         </div>
       </nav>
 
-    {/* HERO SECTION */}
+      {/* HERO SECTION */}
       <header className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-slate-900">
         <video 
           ref={videoRef}
@@ -149,11 +140,9 @@ export default function Home() {
           loop 
           muted 
           playsInline 
-          // FIX: Match lowercase filename from repository
           poster="/herovideo.webp" 
           className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         >
-          {/* FIX: Use lowercase filenames to match your repository */}
           <source src="/herovideo.webm" type="video/webm" />
           <source src="/herovideo.mp4" type="video/mp4" />
         </video>
@@ -165,6 +154,7 @@ export default function Home() {
           <p className="text-xl md:text-2xl mb-10 opacity-100 font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">Find your perfect stay with us today.</p>
         </div>
       </header>
+
       {/* SERVICES SECTION */}
       <section className="bg-[#f8fafc] min-h-screen flex flex-col justify-between pt-20 pb-6 px-6 snap-start">
         <div className="max-w-7xl mx-auto w-full grow flex flex-col justify-center">
