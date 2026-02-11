@@ -58,21 +58,22 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       
       {/* NAVIGATION */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 flex items-center ${navBg}`}>
-        <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
-          <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
-            <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
-              <Image 
-                src="/masayaasialtd-.webp" 
-                alt="masayatrip Logo" 
-                fill 
-                // FIX: Apply brightness-0 invert when NOT scrolled so logo is white on the video
-                className={`object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`} 
-                priority 
-                unoptimized 
-              />
-            </div>
-          </Link>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 flex items-center ${navBg}`}>
+  <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
+    <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
+      <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
+        <Image 
+          // FIX: Ensure this matches your filename EXACTLY (casing and hyphens)
+          src="/masayaasialtd.webp" 
+          alt="masayatrip Logo" 
+          fill 
+          // This ensures the logo is white on the video and original color on the white nav
+          className={`object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`} 
+          priority 
+          unoptimized 
+        />
+      </div>
+    </Link>
 
           {/* CENTER NAVIGATION ITEMS */}
           <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-10 z-10">
