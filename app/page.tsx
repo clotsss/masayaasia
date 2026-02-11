@@ -32,29 +32,17 @@ const services = [
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  
+  // FIXED: Explicit type added to prevent "never" build error
   const videoRef = useRef<HTMLVideoElement>(null); 
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
 
-    const video = videoRef.current;
-    if (video) {
-      // Compatibility: Explicitly set muted/playsinline for mobile browsers
-      video.muted = true;
-      video.defaultMuted = true;
-      
-      const attemptPlay = () => {
-        video.play().catch(() => {
-          // Fallback: Autoplay is often blocked on mobile Low Power Mode until a user touch
-          const forcePlay = () => {
-            video.play();
-            window.removeEventListener('touchstart', forcePlay);
-          };
-          window.addEventListener('touchstart', forcePlay);
-        });
-      };
-      attemptPlay();
+    // FIXED: Play trigger to ensure video starts on live server
+    if (videoRef.current) {
+      videoRef.current.play().catch(err => console.log("Video playback error:", err));
     }
 
     return () => window.removeEventListener('scroll', handleScroll);
@@ -62,19 +50,22 @@ export default function Home() {
 
   const textColor = scrolled ? 'text-black' : 'text-white';
   const navBg = scrolled ? 'bg-white/90 shadow-md' : 'backdrop-blur-xl bg-transparent';
+  
 
-  return (
+return (
     <div className="min-h-screen bg-white">
       
-      {/* NAVIGATION - Improved mobile layout without changing logic */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 flex items-center ${navBg}`}>
-        <div className="max-w-[1400px] mx-auto w-full px-4 md:px-12 flex justify-between items-center relative">
+      {/* NAVIGATION */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-13 flex items-center ${navBg}`}>
+        <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
-            <div className="relative w-28 md:w-32 h-10 md:h-12 cursor-pointer hover:opacity-80 transition-opacity">
+            <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
               <Image 
+                // Matches your file: masayaAsiaLtd-.webp
                 src="/masayaAsiaLtd-.webp" 
                 alt="masayatrip Logo" 
                 fill 
+                // FIXED: Removed 'brightness-0 invert' so it stays original colors
                 className="object-contain transition-all duration-300" 
                 priority 
                 unoptimized 
@@ -82,24 +73,70 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* Revised: Allow small screens to see links without the 'hidden' restriction */}
-          <div className="flex absolute left-1/2 -translate-x-1/2 items-center gap-3 md:gap-10 z-10 overflow-x-auto no-scrollbar max-w-[40%] md:max-w-none">
-            <div className="flex items-center gap-3 md:gap-6">
-              <Link href="/about-us" className={`${textColor} text-[10px] md:text-[12px] tracking-wide font-bold md:font-light whitespace-nowrap`}>
-                About
-              </Link>
-              <Link href="https://www.masayatrip.com/privacy-policy" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[10px] md:text-[11px] font-bold md:font-normal`}>Policy</Link>
+          {/* CENTER NAVIGATION ITEMS */}
+          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-10 z-10">
+            <div className="flex items-center gap-6">
+              
+              {/* ABOUT US */}
+              <div className="relative group py-5">
+                <Link href="/about-us" className={`${textColor} text-[12px] tracking-wide hover:text-[#ff00e1] transition-colors whitespace-nowrap font-light`}>
+                  About us
+                </Link>
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
+                  <div className="relative h-40 w-full">
+                    <Image src="/aboutus.webp" alt="About Us" fill className="object-cover" unoptimized />
+                  </div>
+                </div>
+              </div>
+
+              
+              <div className="relative group py-5">
+                <Link href="https://www.masayatrip.com/privacy-policy" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Policy</Link>
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
+                  <div className="relative h-40 w-full">
+                    <Image src="/policy.webp" alt="Policy" fill className="object-cover" unoptimized />
+                  </div>
+                </div>
+              </div>
             </div>
-            <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[10px] md:text-[11px] font-bold md:font-normal`}>Explore</Link>
+
+        <div className="relative group py-5">
+              <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] hover:text-[#ff00e1] transition-all tracking-[0.2em]`}>Explore</Link>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
+                <div className="relative h-44 w-full">
+                  <Image src="/explore.webp" alt="Explore" fill className="object-cover" unoptimized />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-6">
+              <div className="relative group py-5">
+                <Link href="https://www.masayatrip.com/community" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Community</Link>
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
+                  <div className="relative h-40 w-full">
+                    <Image src="/community.webp" alt="Community" fill className="object-cover" unoptimized />
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative group py-5">
+                <Link href="https://www.masayatrip.com/membership" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Membership</Link>
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
+                  <div className="relative h-40 w-full">
+                    <Image src="/membership.webp" alt="Membership" fill className="object-cover" unoptimized />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <Link href="https://www.masayatrip.com/contact-us" target="_blank" rel="noopener noreferrer" className="z-10 text-[10px] md:text-[11px] tracking-tight md:tracking-[0.2em] text-white bg-pink-700 px-3 py-2 md:px-6 md:py-2.5 rounded-full hover:bg-[#00C2FF] transition-all whitespace-nowrap">
-            Contact
+          <Link href="https://www.masayatrip.com/contact-us" target="_blank" rel="noopener noreferrer" className="z-10 text-[11px] tracking-[0.2em] text-white bg-pink-700 px-6 py-2.5 rounded-full hover:bg-[#00C2FF] transition-all">
+            Contact Us
           </Link>
         </div>
       </nav>
 
-      {/* HERO SECTION - Fixed Video Compatibility */}
+      {/* HERO SECTION */}
       <header className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-slate-900">
         <video 
           ref={videoRef}
@@ -107,14 +144,11 @@ export default function Home() {
           loop 
           muted 
           playsInline 
-          // @ts-ignore: Required for older iOS devices
-          webkit-playsinline="true"
           poster="/herovideo.webp" 
           className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         >
-          {/* Priority: MP4 first for maximum mobile compatibility */}
-          <source src="/herovideo.mp4" type="video/mp4" />
           <source src="/herovideo.webm" type="video/webm" />
+          <source src="/herovideo.mp4" type="video/mp4" />
         </video>
         
         <div className="absolute inset-0 bg-black/20 z-[1]"></div>
@@ -171,3 +205,4 @@ export default function Home() {
     </div>
   );
 }
+
