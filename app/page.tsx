@@ -36,18 +36,23 @@ export default function Home() {
   // FIXED: Explicit type added to prevent "never" build error
   const videoRef = useRef<HTMLVideoElement>(null); 
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
+useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      
+      // Force play on every interaction or load
+      const attemptPlay = () => {
+        video.play().catch(() => {
+          // If it fails (like in Low Power Mode), we try again on the first scroll
+          window.addEventListener('touchstart', () => video.play(), { once: true });
+        });
+      };
 
-    // FIXED: Play trigger to ensure video starts on live server
-    if (videoRef.current) {
-      videoRef.current.play().catch(err => console.log("Video playback error:", err));
+      attemptPlay();
     }
-
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const textColor = scrolled ? 'text-black' : 'text-white';
   const navBg = scrolled ? 'bg-white/90 shadow-md' : 'backdrop-blur-xl bg-transparent';
   
