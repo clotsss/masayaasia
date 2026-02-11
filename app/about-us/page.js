@@ -18,10 +18,9 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-pink-100 selection:text-pink-600">
       
-     {/* NAVIGATION BAR */}
+ {/* NAVIGATION BAR */}
       <nav className="fixed top-0 left-0 right-0 z-[100] bg-slate-800/50 backdrop-blur-md px-6 py-1">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          {/* FIXED: Changed href to external URL and added target attributes */}
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-10 cursor-pointer hover:opacity-80 transition-all">
               <Image 
