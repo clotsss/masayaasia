@@ -70,6 +70,7 @@ const textColor = scrolled ? 'text-black' : 'text-white';
               />
             </div>
           </Link>
+        
 
           {/* CENTER NAVIGATION ITEMS */}
           <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-10 z-10">
