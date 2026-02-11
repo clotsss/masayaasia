@@ -184,11 +184,11 @@ export default function AboutUs() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center md:text-left">
             <div>
               <p className="text-[8px] font-bold text-slate-500 uppercase tracking-widest mb-1">Email</p>
-              <p className="text-white text-[11px]">booking@masayaasia.com</p>
+              <p className="text-white text-[11px]">support@masayaasia.com.com</p>
             </div>
             <div>
               <p className="text-[8px] font-bold text-slate-500 uppercase tracking-widest mb-1">Phone</p>
-              <p className="text-white text-[11px]">+63 976 104 2451</p>
+              <p className="text-white text-[11px]"> +852 63856774</p>
             </div>
             <div>
               <p className="text-[8px] font-bold text-slate-500 uppercase tracking-widest mb-1">Location</p>
