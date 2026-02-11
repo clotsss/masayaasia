@@ -55,26 +55,27 @@ const textColor = scrolled ? 'text-black' : 'text-white';
   const navBg = scrolled ? 'bg-white/90 shadow-md' : 'backdrop-blur-xl bg-transparent';
   
   return (
-    <div className="min-h-screen bg-white">
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 flex items-center ${navBg}`}>
+   {/* NAVIGATION */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-13 flex items-center ${navBg}`}>
         <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
               <Image 
-                src="/masayaAsiaLtd-.webp" // Check if this hyphen is in your filename
+                src="/masayaasialtd-.webp" 
                 alt="masayatrip Logo" 
                 fill 
-                className={`object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`} 
+                className="object-contain" 
                 priority 
                 unoptimized 
               />
             </div>
           </Link>
-        
 
           {/* CENTER NAVIGATION ITEMS */}
           <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-10 z-10">
             <div className="flex items-center gap-6">
+              
+              {/* ABOUT US */}
               <div className="relative group py-5">
                 <Link href="/about-us" className={`${textColor} text-[12px] tracking-wide hover:text-[#ff00e1] transition-colors whitespace-nowrap font-light`}>
                   About us
@@ -85,6 +86,7 @@ const textColor = scrolled ? 'text-black' : 'text-white';
                   </div>
                 </div>
               </div>
+
               
               <div className="relative group py-5">
                 <Link href="https://www.masayatrip.com/privacy-policy" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Policy</Link>
