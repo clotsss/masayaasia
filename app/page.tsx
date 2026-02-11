@@ -52,17 +52,21 @@ export default function Home() {
   const navBg = scrolled ? 'bg-white/90 shadow-md' : 'backdrop-blur-xl bg-transparent';
   
 
-  return (
-   {/* NAVIGATION */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-13 flex items-center ${navBg}`}>
+return (
+    <div className="min-h-screen bg-white">
+      
+      {/* NAVIGATION */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 flex items-center ${navBg}`}>
         <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
               <Image 
-                src="/masayaAsiaLtd-.webp" 
+                // FIXED: Matched to the filename with hyphen as per your repository structure
+                src="/masayaasialtd-.webp" 
                 alt="masayatrip Logo" 
                 fill 
-                className="object-contain" 
+                // This ensures the logo is white on the video and original color on the white nav
+                className={`object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`} 
                 priority 
                 unoptimized 
               />
