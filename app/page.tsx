@@ -62,7 +62,7 @@ return (
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
               <Image 
                 // FIXED: Matched to the filename with hyphen as per your repository structure
-                src="/masayaasialtd-.webp" 
+                src="/masayaAsiaLtd-.webp" 
                 alt="masayatrip Logo" 
                 fill 
                 // This ensures the logo is white on the video and original color on the white nav
