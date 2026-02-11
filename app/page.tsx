@@ -61,7 +61,7 @@ const textColor = scrolled ? 'text-black' : 'text-white';
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
               <Image 
-                src="/masayaasialtd-.webp" // Check if this hyphen is in your filename
+                src="/masayaAsiaLtd-.webp" // Check if this hyphen is in your filename
                 alt="masayatrip Logo" 
                 fill 
                 className={`object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`} 
