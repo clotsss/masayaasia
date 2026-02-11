@@ -61,12 +61,12 @@ return (
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
               <Image 
-                // FIXED: Matched to the filename with hyphen as per your repository structure
+                // Matches your file: masayaAsiaLtd-.webp
                 src="/masayaAsiaLtd-.webp" 
                 alt="masayatrip Logo" 
                 fill 
-                // This ensures the logo is white on the video and original color on the white nav
-              
+                // FIXED: Removed 'brightness-0 invert' so it stays original colors
+                className="object-contain transition-all duration-300" 
                 priority 
                 unoptimized 
               />
