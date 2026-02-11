@@ -32,27 +32,17 @@ const services = [
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  
+  // FIXED: Explicit type added to prevent "never" build error
   const videoRef = useRef<HTMLVideoElement>(null); 
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
 
+    // FIXED: Play trigger to ensure video starts on live server
     if (videoRef.current) {
-      // Force muted and playsinline via JS for maximum mobile compatibility
-      videoRef.current.muted = true;
-      videoRef.current.setAttribute('playsinline', 'true');
-      videoRef.current.setAttribute('webkit-playsinline', 'true');
-      
-      videoRef.current.play().catch(err => {
-        console.log("Video playback error handled:", err);
-        // Fallback: Try playing again on user interaction if blocked by battery saver
-        const playOnInteraction = () => {
-          videoRef.current?.play();
-          window.removeEventListener('click', playOnInteraction);
-        };
-        window.addEventListener('click', playOnInteraction);
-      });
+      videoRef.current.play().catch(err => console.log("Video playback error:", err));
     }
 
     return () => window.removeEventListener('scroll', handleScroll);
@@ -60,19 +50,22 @@ export default function Home() {
 
   const textColor = scrolled ? 'text-black' : 'text-white';
   const navBg = scrolled ? 'bg-white/90 shadow-md' : 'backdrop-blur-xl bg-transparent';
+  
 
-  return (
+return (
     <div className="min-h-screen bg-white">
       
       {/* NAVIGATION */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 flex items-center ${navBg}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-13 flex items-center ${navBg}`}>
         <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
               <Image 
+                // Matches your file: masayaAsiaLtd-.webp
                 src="/masayaAsiaLtd-.webp" 
                 alt="masayatrip Logo" 
                 fill 
+                // FIXED: Removed 'brightness-0 invert' so it stays original colors
                 className="object-contain transition-all duration-300" 
                 priority 
                 unoptimized 
@@ -96,6 +89,7 @@ export default function Home() {
                 </div>
               </div>
 
+              
               <div className="relative group py-5">
                 <Link href="https://www.masayatrip.com/privacy-policy" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Policy</Link>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
@@ -106,7 +100,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative group py-5">
+        <div className="relative group py-5">
               <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] hover:text-[#ff00e1] transition-all tracking-[0.2em]`}>Explore</Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                 <div className="relative h-44 w-full">
@@ -136,7 +130,7 @@ export default function Home() {
             </div>
           </div>
 
-          <Link href="https://www.masayatrip.com/contact-us" target="_blank" rel="noopener noreferrer" className="z-10 text-[11px] tracking-[0.2em] text-white bg-black px-6 py-2.5 rounded-full hover:bg-[#00C2FF] transition-all">
+          <Link href="https://www.masayatrip.com/contact-us" target="_blank" rel="noopener noreferrer" className="z-10 text-[11px] tracking-[0.2em] text-white bg-pink-700 px-6 py-2.5 rounded-full hover:bg-[#00C2FF] transition-all">
             Contact Us
           </Link>
         </div>
@@ -150,15 +144,11 @@ export default function Home() {
           loop 
           muted 
           playsInline 
-          // Required for iOS compatibility
-          // @ts-ignore
-          webkit-playsinline="true"
           poster="/herovideo.webp" 
           className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         >
-          {/* Note: WebM first is better for performance, but MP4 is more compatible */}
-          <source src="/herovideo.mp4" type="video/mp4" />
           <source src="/herovideo.webm" type="video/webm" />
+          <source src="/herovideo.mp4" type="video/mp4" />
         </video>
         
         <div className="absolute inset-0 bg-black/20 z-[1]"></div>
@@ -185,7 +175,6 @@ export default function Home() {
                     src={service.src} 
                     alt={service.name} 
                     fill 
-                    sizes="(max-width: 768px) 100vw, 25vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-[1.2s] ease-out" 
                     unoptimized
                   />
@@ -216,3 +205,4 @@ export default function Home() {
     </div>
   );
 }
+
