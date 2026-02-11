@@ -61,7 +61,7 @@ export default function Home() {
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
               <Image 
                 // FIXED: Matched to the filename with hyphen as per your repository structure
-                src="/masayaasialtd-.webp" 
+                src="/masayaAsialtd-.webp" 
                 alt="masayatrip Logo" 
                 fill 
                 // This ensures the logo is white on the video and original color on the white nav
@@ -100,7 +100,7 @@ export default function Home() {
               <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] hover:text-[#ff00e1] transition-all tracking-[0.2em]`}>Explore</Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
                 <div className="relative h-44 w-full">
-                  <Image src="/Explore.webp" alt="Explore" fill className="object-cover" unoptimized />
+                  <Image src="/explore.webp" alt="Explore" fill className="object-cover" unoptimized />
                 </div>
               </div>
             </div>
