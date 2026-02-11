@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function AboutUs() {
-  // Logic for the automatic image transition
+  // Automatic image transition logic
   const transitionImages = ['/one.webp', '/two.webp', '/three.webp', '/four.webp'];
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -24,7 +24,7 @@ export default function AboutUs() {
           <Link href="/">
             <div className="relative w-32 h-10 cursor-pointer hover:opacity-80 transition-all">
               <Image 
-                src="/MasayaAsiaLtd-.webp" 
+                src="/masayaasialtd-.webp" 
                 alt="Masaya Logo" 
                 fill 
                 className="object-contain" 
@@ -53,6 +53,7 @@ export default function AboutUs() {
             priority
             unoptimized
           />
+          {/* Fixed Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/20 to-slate-950"></div>
         </div>
         <div className="relative z-10 text-center px-4">
