@@ -54,7 +54,7 @@ export default function AboutUs() {
             unoptimized
           />
           {/* Fixed Gradient Overlay */}
-          <div className="absolute inset-0 bg-latient-to-b from-slate-950/60 via-slate-950/20 to-slate-950"></div>
+         <div className="absolute inset-0 bg-latient-to-b from-slate-950/60 via-slate-950/20 to-slate-950"></div>
         </div>
         <div className="relative z-10 text-center px-4">
           <p className="text-white font-bold uppercase tracking-[0.5em] text-[10px] mb-3">Corporate Profile</p>
