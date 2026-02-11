@@ -130,7 +130,7 @@ return (
             </div>
           </div>
 
-          <Link href="https://www.masayatrip.com/contact-us" target="_blank" rel="noopener noreferrer" className="z-10 text-[11px] tracking-[0.2em] text-white bg-pink-700 px-6 py-2.5 rounded-full hover:bg-[#00C2FF] transition-all">
+          <Link href="https://www.masayatrip.com/contact-us" target="_blank" rel="noopener noreferrer" className="z-10 text-[11px] tracking-[0.2em] text-white bg-slate-900 px-6 py-2.5 rounded-full hover:bg-[#00C2FF] transition-all">
             Contact Us
           </Link>
         </div>
