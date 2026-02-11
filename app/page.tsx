@@ -32,159 +32,114 @@ const services = [
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
-  
-  // FIXED: Explicit type added to prevent "never" build error
   const videoRef = useRef<HTMLVideoElement>(null); 
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
 
-    // FIXED: Play trigger to ensure video starts on live server
     if (videoRef.current) {
-      videoRef.current.play().catch(err => console.log("Video playback error:", err));
+      // FORCE ATTRIBUTES for mobile compatibility
+      videoRef.current.muted = true;
+      videoRef.current.setAttribute('playsinline', 'true');
+      
+      videoRef.current.play().catch(err => {
+        // Fallback for Low Power Mode on mobile
+        const playOnTouch = () => {
+          videoRef.current?.play();
+          window.removeEventListener('touchstart', playOnTouch);
+        };
+        window.addEventListener('touchstart', playOnTouch);
+      });
     }
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const textColor = scrolled ? 'text-black' : 'text-white';
-  const navBg = scrolled ? 'bg-white/90 shadow-md' : 'backdrop-blur-xl bg-transparent';
-  
+  const navBg = scrolled ? 'bg-white/95 shadow-md' : 'backdrop-blur-md bg-transparent';
 
-return (
+  return (
     <div className="min-h-screen bg-white">
       
-      {/* NAVIGATION */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-11 flex items-center ${navBg}`}>
-        <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex justify-between items-center relative">
+      {/* NAVIGATION: Added h-16 for better finger-tapping area and mobile link visibility */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-16 flex items-center ${navBg}`}>
+        <div className="max-w-[1400px] mx-auto w-full px-4 md:px-12 flex justify-between items-center relative">
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
-            <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
+            <div className="relative w-28 md:w-32 h-10 cursor-pointer">
               <Image 
-                // Matches your file: masayaAsiaLtd-.webp
                 src="/masayaAsiaLtd-.webp" 
                 alt="masayatrip Logo" 
                 fill 
-                // FIXED: Removed 'brightness-0 invert' so it stays original colors
-                className="object-contain transition-all duration-300" 
+                className="object-contain" 
                 priority 
                 unoptimized 
               />
             </div>
           </Link>
 
-          {/* CENTER NAVIGATION ITEMS */}
-          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-10 z-10">
-            <div className="flex items-center gap-6">
-              
-              {/* ABOUT US */}
-              <div className="relative group py-5">
-                <Link href="/about-us" className={`${textColor} text-[12px] tracking-wide hover:text-[#ff00e1] transition-colors whitespace-nowrap font-light`}>
-                  About us
-                </Link>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
-                  <div className="relative h-40 w-full">
-                    <Image src="/aboutus.webp" alt="About Us" fill className="object-cover" unoptimized />
-                  </div>
-                </div>
-              </div>
-
-              
-              <div className="relative group py-5">
-                <Link href="https://www.masayatrip.com/privacy-policy" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Policy</Link>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
-                  <div className="relative h-40 w-full">
-                    <Image src="/policy.webp" alt="Policy" fill className="object-cover" unoptimized />
-                  </div>
-                </div>
-              </div>
+          {/* MOBILE & DESKTOP LINKS: Removed 'hidden' to ensure users can see links on mobile */}
+          <div className="flex items-center gap-3 md:gap-10">
+            <div className="flex items-center gap-3 md:gap-6">
+              <Link href="/about-us" className={`${textColor} text-[10px] md:text-[12px] font-bold md:font-light tracking-wide`}>
+                About
+              </Link>
+              <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[10px] md:text-[11px] font-bold md:font-light`}>
+                Explore
+              </Link>
             </div>
-
-        <div className="relative group py-5">
-              <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] hover:text-[#ff00e1] transition-all tracking-[0.2em]`}>Explore</Link>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
-                <div className="relative h-44 w-full">
-                  <Image src="/explore.webp" alt="Explore" fill className="object-cover" unoptimized />
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-6">
-              <div className="relative group py-5">
-                <Link href="https://www.masayatrip.com/community" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Community</Link>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
-                  <div className="relative h-40 w-full">
-                    <Image src="/community.webp" alt="Community" fill className="object-cover" unoptimized />
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative group py-5">
-                <Link href="https://www.masayatrip.com/membership" target="_blank" rel="noopener noreferrer" className={`${textColor} text-[11px] tracking-widest hover:text-[#ff00e1] transition-colors`}>Membership</Link>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 overflow-hidden bg-white rounded-2xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300">
-                  <div className="relative h-40 w-full">
-                    <Image src="/membership.webp" alt="Membership" fill className="object-cover" unoptimized />
-                  </div>
-                </div>
-              </div>
-            </div>
+            
+            <Link href="https://www.masayatrip.com/contact-us" target="_blank" rel="noopener noreferrer" className="text-[10px] md:text-[11px] text-white bg-pink-700 px-4 py-2 rounded-full hover:bg-[#00C2FF] transition-all">
+              Contact
+            </Link>
           </div>
-
-          <Link href="https://www.masayatrip.com/contact-us" target="_blank" rel="noopener noreferrer" className="z-10 text-[11px] tracking-[0.2em] text-white bg-pink-700 px-6 py-2.5 rounded-full hover:bg-[#00C2FF] transition-all">
-            Contact Us
-          </Link>
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <header className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-slate-900">
+      {/* HERO SECTION: Fixed 100vh for mobile browser bars */}
+      <header className="relative w-full h-[100dvh] flex items-center justify-center overflow-hidden bg-slate-900">
         <video 
           ref={videoRef}
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
+          autoPlay loop muted playsInline 
           poster="/herovideo.webp" 
-          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover z-0"
         >
-          <source src="/herovideo.webm" type="video/webm" />
+          {/* Use MP4 first for better Android/iOS compatibility */}
           <source src="/herovideo.mp4" type="video/mp4" />
+          <source src="/herovideo.webm" type="video/webm" />
         </video>
         
-        <div className="absolute inset-0 bg-black/20 z-[1]"></div>
+        <div className="absolute inset-0 bg-black/30 z-[1]"></div>
         
         <div className="relative z-10 px-4 text-center text-white">
-          <h1 className="text-4xl md:text-6xl font-black mb-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)] tracking-tighter uppercase">MASAYA ASIA</h1>
-          <p className="text-xl md:text-2xl mb-10 opacity-100 font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">Find your perfect stay with us today.</p>
+          <h1 className="text-3xl md:text-6xl font-black mb-4 drop-shadow-xl uppercase tracking-tighter">MASAYA ASIA</h1>
+          <p className="text-lg md:text-2xl font-medium drop-shadow-md">Find your perfect stay with us today.</p>
         </div>
       </header>
 
-      {/* SERVICES SECTION */}
-      <section className="bg-[#f8fafc] min-h-screen flex flex-col justify-between pt-20 pb-6 px-6 snap-start">
-        <div className="max-w-7xl mx-auto w-full grow flex flex-col justify-center">
-          <div className="mb-8 border-l-4 border-pink-500 pl-6">
-            <h3 className="text-3xl font-black text-blue-950 uppercase tracking-tighter leading-none">Premium Services</h3>
-            <p className="text-gray-500 font-bold text-[9px] uppercase tracking-[0.4em] mt-2">Curated Excellence for Your Journey</p>
+      {/* SERVICES SECTION: Fixed Grid for Mobile (1 column) to Desktop (4 columns) */}
+      <section className="bg-[#f8fafc] py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-10 border-l-4 border-pink-500 pl-6">
+            <h3 className="text-2xl md:text-3xl font-black text-blue-950 uppercase">Premium Services</h3>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service) => (
-              <div key={service.name} className="group flex flex-col bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500">
-                <Link href={service.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-video overflow-hidden">
+              <div key={service.name} className="group bg-white border border-gray-100 shadow-sm overflow-hidden">
+                <Link href={service.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-video">
                   <Image 
                     src={service.src} 
                     alt={service.name} 
                     fill 
-                    className="object-cover group-hover:scale-110 transition-transform duration-[1.2s] ease-out" 
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500" 
                     unoptimized
                   />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="px-6 py-2 bg-white text-black font-black text-[10px] uppercase tracking-[0.3em] transform translate-y-4 group-hover:translate-y-0 transition-all shadow-xl">View Details</div>
-                  </div>
                 </Link>
-                <div className="p-8 flex flex-col">
-                  <h4 className="text-lg font-black text-blue-950 uppercase tracking-tight mb-3">{service.name}</h4>
-                  <p className="text-gray-600 font-medium text-[12px] leading-relaxed line-clamp-2">{service.desc}</p>
+                <div className="p-6">
+                  <h4 className="text-lg font-black text-blue-950 uppercase mb-2">{service.name}</h4>
+                  <p className="text-gray-600 text-sm line-clamp-2">{service.desc}</p>
                 </div>
               </div>
             ))}
@@ -193,16 +148,11 @@ return (
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-slate-900 text-white py-4 px-6 border-t border-white/5 relative">
-        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center">
-          <div className="w-full flex justify-center">
-            <p className="text-white text-[8px] tracking-[0.4em] uppercase font-bold antialiased text-center">
-              © 2026 MasayaAsia Portal <span className="mx-2 text-white/50">|</span> All Rights Reserved
-            </p>
-          </div>
-        </div>
+      <footer className="bg-slate-900 text-white py-6 px-6 text-center">
+        <p className="text-[10px] tracking-widest uppercase font-bold opacity-70">
+          © 2026 MasayaAsia Portal | All Rights Reserved
+        </p>
       </footer>
     </div>
   );
 }
-
