@@ -61,7 +61,7 @@ const textColor = scrolled ? 'text-black' : 'text-white';
           <Link href="https://www.masayatrip.com/" target="_blank" rel="noopener noreferrer">
             <div className="relative w-32 h-12 cursor-pointer hover:opacity-80 transition-opacity">
               <Image 
-                src="/masayaasialtd-.webp" 
+                src="/masayaAsiaLtd-.webp" 
                 alt="masayatrip Logo" 
                 fill 
                 className="object-contain" 
