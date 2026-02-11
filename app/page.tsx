@@ -142,13 +142,15 @@ return (
           ref={videoRef}
           autoPlay 
           loop 
-          muted 
-          playsInline 
+          muted // Essential: Browsers block autoplay if not explicitly muted
+          playsInline // Essential: Prevents iOS from forcing full-screen mode
+          preload="auto"
           poster="/herovideo.webp" 
           className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         >
-          <source src="/herovideo.webm" type="video/webm" />
+          {/* Use .mp4 first for better mobile compatibility across all browsers */}
           <source src="/herovideo.mp4" type="video/mp4" />
+          <source src="/herovideo.webm" type="video/webm" />
         </video>
         
         <div className="absolute inset-0 bg-black/20 z-[1]"></div>
